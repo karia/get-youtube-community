@@ -58,7 +58,7 @@ def addgs(newurl):
     return
 
 #tweet URL
-def tweeturl(url):
+def tweeturl(name,url):
     CK = os.environ.get('CONSUMER_KEY')
     CS = os.environ.get('CONSUMER_SECRET')
     AT = os.environ.get('ACCESS_TOKEN')
@@ -66,10 +66,10 @@ def tweeturl(url):
     twitter = OAuth1Session(CK, CS, AT, ATS)
     endpoint = "https://api.twitter.com/1.1/statuses/update.json"
 
-    tweet = '【テスト投稿】YouTubeコミュニティに新規投稿があるみたいです: ' + url
-
+    tweet = name + 'のYouTubeコミュニティに新規投稿があるみたいです: ' + url
     params = {"status" : tweet}
     print(params)
+
     res = twitter.post(endpoint, params = params)
     if res.status_code == 200:
         print("Success.")
@@ -80,6 +80,7 @@ def tweeturl(url):
 
 def lambda_handler(event, context):
     community_url = event['community_url']
+    channel_name = event['channel_name']
 
     chrome = Chrome()
     driver = chrome.headless_lambda()
@@ -99,7 +100,7 @@ def lambda_handler(event, context):
         print('no update')
     else:
         for i in diffurls:
-            tweeturl(i)
+            tweeturl(channel_name,i)
             addgs(i)
 
     return

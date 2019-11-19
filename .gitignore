@@ -1,6 +1,5 @@
 *.zip
 credentials.json
-event.json
 template.yaml
 
 __pycache__
