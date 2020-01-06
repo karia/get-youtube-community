@@ -100,10 +100,7 @@ def lambda_handler(event, context):
         print('no update')
     else:
         for i in diffurls:
-            if i.startswith(community_url):
-                tweeturl(channel_name,i)
-                addgs(i)
-            else:
-                print('[WARN] invalid URL: ' + i)
-
+            print('[NEW POST] ' + i)
+            tweeturl(channel_name,i)
+            addgs(i)
     return
