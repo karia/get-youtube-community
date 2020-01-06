@@ -19,9 +19,9 @@ cp template.yaml.sample template.yaml
 code template.yaml
 ```
 
-edit template.yaml
+After edit & save template.yaml, and exec:
 
 
 ```
-sam invoke local --event mico.json
+sam local invoke --event mico.json
 ```
